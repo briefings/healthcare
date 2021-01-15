@@ -11,6 +11,8 @@
     conda install -c anaconda pywin32 jupyterlab nodejs # installs: requests, urllib3
     conda install -c anaconda pytest coverage pylint pytest-cov
     
+    conda install -c anaconda xlrd
+    
 ```
 
 <br>
