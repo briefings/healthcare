@@ -27,3 +27,13 @@ whereby filter.txt does not include `python-graphviz`, `pywin32`, `nodejs`.  And
 ```bash
     pylint --generate-rcfile > .pylintrc
 ```
+
+<br>
+
+**Extensions**
+
+```bash
+    conda activate phe
+    jupyter labextension install @jupyterlab/toc
+```
+
