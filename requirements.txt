@@ -1,0 +1,9 @@
+dask[compete]==2.30.0
+jupyterlab==2.2.6
+pytest==0.0.0
+coverage==5.3
+pylint==2.6.0
+pytest-cov==2.10.1
+## The following requirements were added by pip freeze:
+numpy==1.19.1
+pandas==1.1.3
