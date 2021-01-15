@@ -1,0 +1,6 @@
+dask
+jupyterlab
+pytest
+coverage
+pylint
+pytest-cov
