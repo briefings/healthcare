@@ -28,6 +28,8 @@ class Formatting:
 
     def inspect(self, wide: pd.DataFrame, narrow: pd.DataFrame):
         """
+        In this context the dimension attributes are date & epoch, therefore
+        these are the fields that will be excluded from calculation procedures.
 
         :param wide:
         :param narrow:
