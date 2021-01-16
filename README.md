@@ -39,3 +39,8 @@ whereby filter.txt does not include `python-graphviz`, `pywin32`, `nodejs`.  And
     jupyter labextension install @jupyterlab/toc
 ```
 
+<br>
+
+**Pending notebooks & notes**
+
+* [phe.ipynb](https://colab.research.google.com/github/briefings/phe/blob/develop/notebooks/phe.ipynb)
