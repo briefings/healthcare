@@ -12,6 +12,8 @@ def main():
     logger.info('\n{}\n\n'.format(wide.head()))
     logger.info('\n{}\n\n'.format(narrow.head()))
 
+    logger.info('\n{}\n\n'.format(institutions))
+
 
 if __name__ == '__main__':
     root = os.getcwd()
