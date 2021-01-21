@@ -19,8 +19,8 @@ class AdmissionsTotal:
         Dimensions = collections.namedtuple(typename='Dimensions', field_names=['all', 'descriptive'])
         self.dimensions = Dimensions._make((['region', 'code', 'institution'], ['region', 'institution']))
 
-        Data = collections.namedtuple(typename='Data', field_names=['cells', 'start', 'end'])
-        self.data = Data._make(('C:KM', 24, 515))
+        Data = collections.namedtuple(typename='Data', field_names=['sheet_name', 'cells', 'start', 'end'])
+        self.data = Data._make(('Admissions Total', 'C:KM', 24, 515))
 
         FieldNames = collections.namedtuple(typename='FieldNames', field_names=['cells', 'row'])
         self.fieldnames = FieldNames._make(('F:KM', 13))
@@ -28,14 +28,14 @@ class AdmissionsTotal:
         self.notes = "Provider Level Data - Admissions - Number " \
                      "of patients admitted with COVID-19 (Last 24hrs)"
 
-    def readings(self) -> pd.DataFrame:
+    def dataset(self) -> pd.DataFrame:
         """
 
         :return:
         """
 
         try:
-            return pd.read_excel(io=self.url, sheet_name='Admissions Total', header=None,
+            return pd.read_excel(io=self.url, sheet_name=self.data.sheet_name, header=None,
                                  skiprows=np.arange(self.data.start - 1), usecols=self.data.cells,
                                  nrows=(self.data.end - self.data.start + 1))
         except OSError as err:
@@ -49,7 +49,7 @@ class AdmissionsTotal:
 
         try:
             names = pd.read_excel(
-                io=self.url, sheet_name='Admissions Total', header=None, skiprows=self.fieldnames.row - 1,
+                io=self.url, sheet_name=self.data.sheet_name, header=None, skiprows=self.fieldnames.row - 1,
                 usecols=self.fieldnames.cells, nrows=1, parse_dates=True)
         except OSError as err:
             raise Exception(err.strerror) from err
@@ -71,8 +71,8 @@ class AdmissionsTotal:
 
     def exc(self) -> (pd.DataFrame, pd.DataFrame, str):
         """
-
-        :return:
+        
+        :return: 
         """
 
         # Bare minimum checks
@@ -81,11 +81,12 @@ class AdmissionsTotal:
             "of the fields names"
 
         # Data
-        data = self.readings().set_axis(labels=self.fields(), axis=1)
+        data = self.dataset()
+        data = data.set_axis(labels=self.fields(), axis=1)
 
         # Hence
-        sample = data[data.columns.drop(labels=self.dimensions.descriptive)].copy()
-        sample.fillna(0, inplace=True)
+        series = data[data.columns.drop(labels=self.dimensions.descriptive)].copy()
+        series.fillna(0, inplace=True)
         institutions = self.institutions(blob=data)
 
-        return sample, institutions, self.notes
+        return series, institutions, self.notes
