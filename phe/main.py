@@ -5,14 +5,33 @@ import logging
 
 def main():
 
-    sample, institutions, notes = phe.cases.admissionstotal.AdmissionsTotal(url=configurations.url).exc()
-    logger.info('\n{}\n\n'.format(sample.head()))
+    # Clean-up
+    phe.algorithms.directories.Directories().exc()
 
-    wide, narrow = phe.baselines.formatting.Formatting().exc(blob=sample)
-    logger.info('\n{}\n\n'.format(wide.head()))
-    logger.info('\n{}\n\n'.format(narrow.head()))
+    # Get the data, and structure it for graphing
+    interface = phe.cases.interface.Interface()
 
-    logger.info('\n{}\n\n'.format(institutions))
+    for tab in ['admissionstotal', 'admissions85']:
+
+        logger.info('Analysing: \'{}\'\n'.format(tab))
+
+        # Retrieving
+        series, institutions, notes = interface.exc(tab=tab)
+        logger.info('Sample\n{}\n\n'.format(series.head()))
+        logger.info('Institutions\n{}\n\n'.format(institutions))
+
+        # Structuring
+        wide, narrow = phe.baselines.formatting.Formatting().exc(blob=series)
+        logger.info('\n\nwide:\n')
+        logger.info(wide.info())
+        logger.info('\n\nnarrow:\n')
+        logger.info(narrow.info())
+
+        # Finally, graphing data ...
+        # Note: phe.highcharts.graphseries involves parallel processing
+        path = os.path.join(configurations.warehouse, tab)
+        phe.tableau.graphseries.GraphSeries(blob=narrow, institutions=institutions, path=path).exc()
+        phe.highcharts.graphseries.GraphSeries(blob=wide, institutions=institutions, path=path).exc()
 
 
 if __name__ == '__main__':
@@ -22,11 +41,14 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
 
-    import config
-
-    configurations = config.Config()
-
-    import phe.cases.admissionstotal
+    import phe.cases.interface
     import phe.baselines.formatting
+    import phe.algorithms.directories
+    
+    import phe.highcharts.graphseries
+    import phe.tableau.graphseries
+
+    import config
+    configurations = config.Config()
 
     main()

@@ -1,42 +1,61 @@
-import json
+"""
+Module graphseries
+"""
 import os
 
-import dask
 import pandas as pd
 
 
 class GraphSeries:
+    """
+    Class GraphSeries
+
+    Creates the most appropriate data structure for Tableau graphing
+    """
 
     def __init__(self, blob: pd.DataFrame, institutions: pd.DataFrame, path: str):
+        """
+
+        :param blob: A summary of the time series per institution; narrow format
+        :param institutions: The distinct institutions
+        :param path: The data will be saved here
+        """
+
         self.blob = blob
         self.institutions = institutions
         self.path = path
 
-    def series(self, code):
-        excerpt = self.blob[['epoch', code]].rename(columns={code: 'admissions'})
-        dictionary = excerpt.to_dict(orient='records')
-
-        data = {'code': code, 'data': dictionary}
-
-        return data
-
-    def write(self, data):
+    def getbranch(self):
         """
-        filestring = os.path.join(self.path, 'admissions.json')
-        if os.path.isfile(filestring):
-            os.remove(filestring)
 
-        :param data: The data that would be written into a file
         :return:
         """
 
-        with open(os.path.join(self.path, 'admissions.json'), 'w') as disk:
-            json.dump(data, disk)
+        branch = os.path.join(self.path, 'tableau')
+
+        if not os.path.exists(branch):
+            os.makedirs(branch)
+
+        return branch
+
+    def write(self, branch):
+        """
+
+        :param branch:
+        :return:
+        """
+
+        self.blob.to_csv(path_or_buf=os.path.join(branch, 'series.csv'),
+                         header=True, index=False, encoding='UTF-8')
+
+        self.institutions.to_csv(path_or_buf=os.path.join(branch, 'institutions.csv'),
+                                 header=True, index=False, encoding='UTF-8')
 
     def exc(self):
-        computations = [dask.delayed(self.series)(code=c['code'])
-                        for c in self.institutions.to_dict(orient='records')]
+        """
 
-        dask.visualize(computations, filename='tableau', format='pdf')
+        :return:
+        """
 
-        self.write(dask.compute(computations, scheduler='processes')[0])
+        branch = self.getbranch()
+        self.write(branch=branch)
