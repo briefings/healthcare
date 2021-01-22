@@ -43,6 +43,6 @@ class Structures:
 
         data = blob.drop(columns=['epoch']).melt(id_vars=['date'],
                                                  var_name='code',
-                                                 value_name='admissions')
+                                                 value_name='value')
 
         return data
