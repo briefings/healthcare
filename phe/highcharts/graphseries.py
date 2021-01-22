@@ -52,7 +52,7 @@ class GraphSeries:
         :return:
         """
 
-        excerpt = self.blob[['epoch', code]].rename(columns={code: 'admissions'})
+        excerpt = self.blob[['epoch', code]].rename(columns={code: 'value'})
         dictionary = excerpt.to_dict(orient='records')
 
         data = {'code': code, 'institution': institution,
