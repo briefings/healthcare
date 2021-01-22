@@ -11,20 +11,20 @@ def main():
     # Get the data, and structure it for graphing
     interface = phe.cases.interface.Interface()
 
-    for tab in ['admissionstotal', 'admissions85']:
+    for tab in ['admissionstotal', 'admissions85', 'totalbeds']:
 
-        logger.info('Analysing: \'{}\'\n'.format(tab))
+        print('\n\n')
+        logger.info(' Analysing -> \'{}\'\n'.format(tab))
 
         # Retrieving
         series, institutions, notes = interface.exc(tab=tab)
-        logger.info('Sample\n{}\n\n'.format(series.head()))
-        logger.info('Institutions\n{}\n\n'.format(institutions))
+        logger.info(' Description -> \n{}\n'.format(notes))
+        logger.info(' Institutions ->')
+        logger.info(institutions.info())
 
         # Structuring
         wide, narrow = phe.baselines.formatting.Formatting().exc(blob=series)
-        logger.info('\n\nwide:\n')
-        logger.info(wide.info())
-        logger.info('\n\nnarrow:\n')
+        logger.info(' Narrow data format ->')
         logger.info(narrow.info())
 
         # Finally, graphing data ...
