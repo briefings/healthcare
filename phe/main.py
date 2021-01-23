@@ -18,19 +18,14 @@ def main():
 
     for tab in ['admissionstotal', 'totalbeds']:
 
-        print('\n')
+        # In focus
         logger.info(' Analysing -> \'{}\'\n'.format(tab))
 
         # Retrieving
         series, institutions, notes = interface.exc(tab=tab)
-        logger.info(' Description -> \n{}\n'.format(notes))
-        logger.info(' Institutions ->')
-        logger.info(institutions.info())
 
         # Structuring
         wide, narrow = phe.baselines.formatting.Formatting().exc(blob=series)
-        logger.info(' Narrow data format ->')
-        logger.info(narrow.info())
 
         # Finally, graphing data ...
         # Note: phe.highcharts.graphseries involves parallel processing
