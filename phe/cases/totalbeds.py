@@ -9,13 +9,13 @@ import phe.algorithms.patterns
 # noinspection PyUnresolvedReferences,PyProtectedMember
 class TotalBeds:
 
-    def __init__(self, url):
+    def __init__(self, uri):
         """
 
-        :param url:
+        :param uri:
         """
 
-        self.url = url
+        self.uri = uri
         Dimensions = collections.namedtuple(typename='Dimensions', field_names=['all', 'descriptive'])
         self.dimensions = Dimensions._make((['region', 'code', 'institution'], ['region', 'institution']))
 
@@ -34,7 +34,7 @@ class TotalBeds:
         """
 
         try:
-            return pd.read_excel(io=self.url, sheet_name=self.data.sheet_name, header=None,
+            return pd.read_excel(io=self.uri, sheet_name=self.data.sheet_name, header=None,
                                  skiprows=np.arange(self.data.start - 1), usecols=self.data.cells,
                                  nrows=(self.data.end - self.data.start + 1))
         except OSError as err:
@@ -48,7 +48,7 @@ class TotalBeds:
 
         try:
             names = pd.read_excel(
-                io=self.url, sheet_name=self.data.sheet_name, header=None, skiprows=self.fieldnames.row - 1,
+                io=self.uri, sheet_name=self.data.sheet_name, header=None, skiprows=self.fieldnames.row - 1,
                 usecols=self.fieldnames.cells, nrows=1, parse_dates=True)
         except OSError as err:
             raise Exception(err.strerror) from err
