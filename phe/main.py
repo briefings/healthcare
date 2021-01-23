@@ -5,15 +5,20 @@ import logging
 
 def main():
 
+    # Unload data
+    logger.info(' {}\n'.format('Unloading data ...'))
+    phe.algorithms.unload.Unload().exc()
+
     # Clean-up
+    logger.info(' {}\n'.format('Preparing warehouse ...'))
     phe.algorithms.directories.Directories().exc()
 
     # Get the data, and structure it for graphing
     interface = phe.cases.interface.Interface()
 
-    for tab in ['admissionstotal', 'admissions85', 'totalbeds']:
+    for tab in ['admissionstotal', 'totalbeds']:
 
-        print('\n\n')
+        print('\n')
         logger.info(' Analysing -> \'{}\'\n'.format(tab))
 
         # Retrieving
@@ -43,6 +48,8 @@ if __name__ == '__main__':
 
     import phe.cases.interface
     import phe.baselines.formatting
+
+    import phe.algorithms.unload
     import phe.algorithms.directories
     
     import phe.highcharts.graphseries

@@ -7,3 +7,4 @@ pytest-cov==2.10.1
 ## The following requirements were added by pip freeze:
 numpy==1.19.1
 pandas==1.1.3
+requests==2.24.0

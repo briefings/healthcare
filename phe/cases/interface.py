@@ -17,14 +17,14 @@ class Interface:
         """
 
         configurations = config.Config()
-        url = configurations.url
+        uri = configurations.uri
 
-        self.admissionstotal = phe.cases.admissionstotal.AdmissionsTotal(url=url)
-        self.admissions85 = phe.cases.admissions85.Admissions85(url=url)
-        self.mvbeds = phe.cases.mvbeds.MVBeds(url=url)
-        self.mvbedscovid = phe.cases.mvbedscovid.MVBedsCOVID(url=url)
-        self.totalbeds = phe.cases.totalbeds.TotalBeds(url=url)
-        self.totalbedscovid = phe.cases.totalbedscovid.TotalBedsCOVID(url=url)
+        self.admissionstotal = phe.cases.admissionstotal.AdmissionsTotal(uri=uri)
+        self.admissions85 = phe.cases.admissions85.Admissions85(uri=uri)
+        self.mvbeds = phe.cases.mvbeds.MVBeds(uri=uri)
+        self.mvbedscovid = phe.cases.mvbedscovid.MVBedsCOVID(uri=uri)
+        self.totalbeds = phe.cases.totalbeds.TotalBeds(uri=uri)
+        self.totalbedscovid = phe.cases.totalbedscovid.TotalBedsCOVID(uri=uri)
 
     def exc(self, tab: str) -> (pd.DataFrame, pd.DataFrame, str):
         """
