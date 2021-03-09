@@ -3,16 +3,16 @@ import collections
 import numpy as np
 import pandas as pd
 
-import phe.algorithms.patterns
+import healthcare.algorithms.patterns
 
 
 # noinspection PyUnresolvedReferences,PyProtectedMember
-class MVBedsCOVID:
+class Admissions85:
 
     def __init__(self, uri):
         """
-
-        :param uri:
+        
+        :param uri: 
         """
 
         self.uri = uri
@@ -20,13 +20,13 @@ class MVBedsCOVID:
         self.dimensions = Dimensions._make((['region', 'code', 'institution'], ['region', 'institution']))
 
         Data = collections.namedtuple(typename='Data', field_names=['sheet_name', 'cells', 'start', 'end'])
-        self.data = Data._make(('MV Beds Occupied Covid-19', 'C:JZ', 24, 515))
+        self.data = Data._make(('Admissions 85+', 'C:KM', 24, 515))
 
         FieldNames = collections.namedtuple(typename='FieldNames', field_names=['cells', 'row'])
-        self.fieldnames = FieldNames._make(('F:JZ', 13))
+        self.fieldnames = FieldNames._make(('F:KM', 13))
 
-        self.notes = " Provider Level Data - Mechanical Ventilation beds - " \
-                     "occupied by confirmed COVID-19 patients (as at 08:00)"
+        self.notes = "Provider Level Data - Admissions - Number of patients " + \
+                     "admitted with COVID-19 (Last 24hrs) - Aged 85+ Years"
 
     def dataset(self) -> pd.DataFrame:
         """
@@ -65,7 +65,7 @@ class MVBedsCOVID:
 
         frame = blob[self.dimensions.all]
         assert frame.shape[0] == frame.drop_duplicates().shape[0]
-        frame = phe.algorithms.patterns.Patterns().exc(blob=frame.copy())
+        frame = healthcare.algorithms.patterns.Patterns().exc(blob=frame.copy())
 
         return frame
 
