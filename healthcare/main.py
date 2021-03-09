@@ -7,14 +7,14 @@ def main():
 
     # Unload data
     logger.info(' {}\n'.format('Unloading data ...'))
-    phe.algorithms.unload.Unload().exc()
+    healthcare.algorithms.unload.Unload().exc()
 
     # Clean-up
     logger.info(' {}\n'.format('Preparing warehouse ...'))
-    phe.algorithms.directories.Directories().exc()
+    healthcare.algorithms.directories.Directories().exc()
 
     # Get the data, and structure it for graphing
-    interface = phe.cases.interface.Interface()
+    interface = healthcare.cases.interface.Interface()
 
     for tab in ['admissionstotal', 'totalbeds']:
 
@@ -25,13 +25,13 @@ def main():
         series, institutions, notes = interface.exc(tab=tab)
 
         # Structuring
-        wide, narrow = phe.baselines.formatting.Formatting().exc(blob=series)
+        wide, narrow = healthcare.baselines.formatting.Formatting().exc(blob=series)
 
         # Finally, graphing data ...
         # Note: phe.highcharts.graphseries involves parallel processing
         path = os.path.join(configurations.warehouse, tab)
-        phe.tableau.graphseries.GraphSeries(blob=narrow, institutions=institutions, path=path).exc()
-        phe.highcharts.graphseries.GraphSeries(blob=wide, institutions=institutions, path=path).exc()
+        healthcare.tableau.graphseries.GraphSeries(blob=narrow, institutions=institutions, path=path).exc()
+        healthcare.highcharts.graphseries.GraphSeries(blob=wide, institutions=institutions, path=path).exc()
 
 
 if __name__ == '__main__':
@@ -41,14 +41,14 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
 
-    import phe.cases.interface
-    import phe.baselines.formatting
+    import healthcare.cases.interface
+    import healthcare.baselines.formatting
 
-    import phe.algorithms.unload
-    import phe.algorithms.directories
+    import healthcare.algorithms.unload
+    import healthcare.algorithms.directories
     
-    import phe.highcharts.graphseries
-    import phe.tableau.graphseries
+    import healthcare.highcharts.graphseries
+    import healthcare.tableau.graphseries
 
     import config
     configurations = config.Config()
