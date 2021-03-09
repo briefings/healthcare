@@ -5,8 +5,8 @@ import collections
 
 import pandas as pd
 
-import phe.baselines.structures
-import phe.baselines.timeseries
+import healthcare.baselines.structures
+import healthcare.baselines.timeseries
 
 
 # noinspection PyUnresolvedReferences,PyProtectedMember
@@ -23,8 +23,8 @@ class Formatting:
         Attributes = collections.namedtuple(typename='Attributes', field_names=['names'])
         self.attributes = Attributes._make([['date', 'epoch']])
 
-        self.timeseries = phe.baselines.timeseries.TimeSeries()
-        self.structures = phe.baselines.structures.Structures()
+        self.timeseries = healthcare.baselines.timeseries.TimeSeries()
+        self.structures = healthcare.baselines.structures.Structures()
 
     def inspect(self, wide: pd.DataFrame, narrow: pd.DataFrame):
         """
