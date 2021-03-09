@@ -1,9 +1,17 @@
-### PHE
 
-* https://docs.dask.org/en/latest/install.html
+This exercise focuses on England's Public Health England [hospital activity data](https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-hospital-activity/), e.g.,
+
+* [Monthly Publication](https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2021/02/Covid-Publication-11-02-2021.xlsx)
+
+The programs herein include a few examples of reading data from multiple-sheet Microsoft Excel files.
+
+
+<br>
+<br>
+
+#### Development Notes
 
 ```bash
-    
     conda install -c anaconda python=3.7
     
     conda install -c anaconda dask # installs: numpy, pandas
@@ -12,8 +20,9 @@
     conda install -c anaconda pytest coverage pylint pytest-cov
     
     conda install -c anaconda xlrd
-    
 ```
+
+For more information about Dask visit https://docs.dask.org/en/latest/install.html
 
 <br>
 
