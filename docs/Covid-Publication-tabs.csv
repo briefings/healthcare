@@ -1,0 +1,7 @@
+"attribute"," region"," code"," institution"," grid"," characteristics"
+"Total Beds Occupied"," C24"," D24"," E24"," [F24 KM515]"," Provider Level Data - Total beds - occupied (as at 08:00)"
+"Total Beds Occupied Covid"," C24"," D24"," E24"," [F24 KM515]"," Provider Level Data - Total beds - occupied by confirmed COVID-19 patients (as at 08:00)"
+"MV Beds Occupied"," C24"," D24"," E24"," [F24 JZ515]"," Provider Level Data - Mechanical Ventilation beds - occupied (as at 08:00)"
+"MV Beds Occupied Covid-19"," C24"," D24"," E24"," [F24 JZ515]"," Provider Level Data - Mechanical Ventilation beds - occupied by confirmed COVID-19 patients (as at 08:00)"
+"Admissions Total"," C24"," D24"," E24"," [F24 KM515]"," Provider Level Data - Admissions - Number of patients admitted with COVID-19 (Last 24hrs)"
+"Admissions 85+"," C24"," D24"," E24"," [F24 KM515]"," Provider Level Data - Admissions - Number of patients admitted with COVID-19 (Last 24hrs) - Aged 85+ Years"
