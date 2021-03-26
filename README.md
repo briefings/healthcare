@@ -9,27 +9,21 @@ The programs herein include a few examples of reading data from multiple-sheet M
 <br>
 <br>
 
-#### Development Notes
+### Development Notes
 
-```bash
-    conda install -c anaconda python=3.7
-    
-    conda install -c anaconda dask # installs: numpy, pandas
-    conda install -c anaconda python-graphviz # installs: graphviz
-    conda install -c anaconda pywin32 jupyterlab nodejs # installs: requests, urllib3
-    conda install -c anaconda pytest coverage pylint pytest-cov
-    
-    conda install -c anaconda xlrd
-```
+<br>
 
-For more information about Dask visit https://docs.dask.org/en/latest/install.html
+**Environment**
+
+Refer to the [github.com/briefings/energy Development Notes](https://github.com/briefings/energy#development-notes), it outlines the
+creation & usage of the environment `miscellaneous`, which is used by this repository also.
 
 <br>
 
 **Requirements**
 
 ```bash
-    conda activate phe
+    conda activate miscellaneous
     pip freeze -r docs/filter.txt > requirements.txt
 ```
 
@@ -41,15 +35,6 @@ whereby filter.txt does not include `python-graphviz`, `pywin32`, `nodejs`.  And
 
 <br>
 
-**Extensions**
-
-```bash
-    conda activate phe
-    jupyter labextension install @jupyterlab/toc
-```
-
-<br>
-
 **Pending notebooks & notes**
 
-* [phe.ipynb](https://colab.research.google.com/github/briefings/phe/blob/develop/notebooks/phe.ipynb)
+* [healthcare.ipynb](https://colab.research.google.com/github/briefings/phe/blob/develop/notebooks/healthcare.ipynb)
